@@ -1,0 +1,13 @@
+[
+    {
+        "package_type" : "Basic", "price" : 150
+    }, 
+
+    {
+        "package_type" : "Advanced", "price" : 250
+    }, 
+
+    {
+        "package_type" : "Premium", "price" : 350
+    }
+]

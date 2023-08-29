@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=10.0">
+    <meta name="description" content="Build Websites using HTML CSS and JavaScript">
+    <meta name="keywords" content="Build Website, Front-end, HTML, CSS, JavaScript">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/favicon/favicon-16x16.png">
+    <style>
+        @font-face {
+            font-family: 'Satisfy';
+            src: url('./assets/fonts/Satisfy-Regular.woff2') format('woff2'),
+                url('./assets/fonts/Satisfy-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --theme-parent: rgb(255, 255, 255);
+            --theme-child: rgb(255, 255, 255);
+            --theme-bold: rgb(31, 111, 97);
+            --theme-text: rgb(0, 0, 0);
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: var(--theme-parent);
+            font-size: 16px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .header {
+            min-width: 100%;
+            height: auto;
+            padding: 3px 3px 3px 3px;
+            box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+            z-index: 1;
+            user-select: none;
+            background-color: var(--theme-child);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--theme-bold);
+            font-family: 'Satisfy';
+            font-size: 22px;
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .open_nav {
+            width: 23px;
+            height: auto;
+            cursor: pointer;
+            font-size: 24px;
+            font-style: normal;
+        }
+
+        .open_nav {
+            color: var(--theme-bold);
+        }
+
+        .sticky {
+            position: fixed;
+            top: 0;
+        }
+
+        .nav_links {
+            display: flex;
+            transition: all 0.7s ease-in-out;
+            -webkit-transition: all 0.7s ease-in-out;
+            -ms-transition: all 0.7s ease-in-out;
+            -moz-transition: all 0.7s ease-in-out;
+            -o-transition: all 0.7s ease-in-out;
+        }
+
+        .nav_links > a, .nav_links > div {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            text-decoration: none;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--theme-bold);
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            letter-spacing: 0.1rem;
+        }
+
+        .close_nav {
+            color: var(--theme-bold);
+        }
+
+        .main {
+            width: 97%;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            margin-top: 20px;
+        }
+
+        .poster {
+            background-color: rgb(104, 197, 188);
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            user-select: none;
+        }
+
+        .quote {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--theme-child);
+            margin-bottom: 20px;
+            box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .quote_text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            margin: 2px 2px 2px 2px;
+            color: var(--theme-text);
+        }
+
+        .quote_text b {
+            color: var(--theme-bold);
+            font-size: 20px;
+        }
+
+        .motor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            user-select: none;
+            background-color: var(--theme-child);
+        }
+
+        .motor_type {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 300px;
+            height: 300px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .motor_content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 290px;
+            height: 290px;
+        }
+
+        .motor_img_header {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .motor_type:not(:nth-child(2)) {
+            border-top: 1px solid var(--theme-bold);
+            box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.07);
+        }
+
+        .motor_type:nth-child(2) {
+            border-bottom: 1px solid var(--theme-bold);
+            box-shadow: 2px 0 10px 1px rgba(0, 0, 0, 0.06);
+        }
+
+        .motor_header {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            color: var(--theme-text);
+        }
+
+        .motor_image {
+            margin-bottom: 10px;
+            font-style: normal;
+            font-size: 22px;
+        }
+
+        .motor_image {
+            color: var(--theme-text);
+        }
+
+        .motor_type:hover .motor_image {
+            color: var(--theme-bold);
+        }
+
+        .motor_type:hover .motor_header {
+            color: var(--theme-bold);
+        }
+
+        .motor_text {
+            word-wrap: break-word;
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            margin-right: 20px;
+            margin-left: 20px;
+            width: 250px;
+            color: var(--theme-text);
+        }
+
+        .skills {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 250px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background-color: var(--theme-child);
+            user-select: none;
+        }
+
+        .skill_content {
+            display: flex;
+            max-height: 100%;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-left: 3px;
+            margin-right: 3px;
+        }
+
+        .skill_text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            width: 55%;
+        }
+
+        .skill_header {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 22px;
+            color: var(--theme-bold);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .skill_body {
+            width: 100%;
+            word-wrap: break-word;
+            text-align: left;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 16px;
+            color: var(--theme-text);
+        }
+
+        .skill_images {
+            max-width: 35%;
+            max-height: 250px;
+            display: flex;
+        }
+
+        .skill_image {
+            width: 163px;
+            height: 185px;
+        }
+
+        .latest_projects {
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background-color: var(--theme-child);
+            user-select: none;
+        }
+
+        .projects_tittle {
+            text-align: center;
+            color: var(--theme-bold);
+            font-weight: 700;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 22px;
+            margin-bottom: 3px;
+            margin-top: 10px;
+        }
+
+        .project_notice {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project_notice b {
+            color: var(--theme-bold);
+        }
+
+        .project_notice i {
+            font-family: 'Times New Roman', Times, serif;
+            font-style: normal;
+        }
+
+        .project_note, .project_click {
+            color: var(--theme-text);
+            text-align: center;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 16px;
+        }
+
+        .projects {
+            display: flex;
+        }
+
+        .project {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 200px;
+            height: 250px;
+            border: 1px solid var(--theme-bold);
+            border-radius: 5px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .project:hover {
+            box-shadow: 0 1px 2px 2px rgba(104, 197, 188, 0.2);
+        }
+
+        .project_image {
+            width: 190px;
+            height: 123px;
+            margin: 4px 4px 4px 4px;
+        }
+
+        .project_line {
+            border: 1px solid var(--theme-bold);
+            align-self: center;
+            min-height: 1%;
+            width: 50%;
+        }
+
+        .project_body {
+            min-height: 49.5%;
+            margin: 4px 4px 4px 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .project_label {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: var(--theme-bold);
+            align-self: center;
+        }
+
+        .project_description {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-weight: 300;
+            font-size: 15px;
+            color: var(--theme-text);
+        }
+
+        .footer {
+            min-width: 100%;
+            height: auto;
+            padding: 3px 3px 3px 3px;
+            margin-top: 20px;
+            flex-shrink: 0;
+            background-color: var(--theme-child);
+            box-shadow: 0 1px 10px 2px rgba(0, 0, 0, 0.1);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Georgia, 'Courier New', Courier, monospace;
+        }
+
+        .footer_sub {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 97%;
+            height: 30px;
+        }
+
+        .themes {
+            display: flex;
+            justify-content: center;
+        }
+
+        .theme {
+            color: var(--theme-text);
+            cursor: pointer;
+            user-select: none;
+            font-size: 22px;
+        }
+
+        .social_links {
+            min-width: 75px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .social_links a {
+            width: auto;
+            height: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .scl-foot {
+            width: 25px;
+            height: 25px;
+        }
+
+        .scl-foot i {
+            color: black;
+        }
+
+        .scl-foot:first-child:hover i {
+            color: rgb(90, 153, 236);
+        }
+
+        .scl-foot:last-child:hover i {
+            color: rgb(70, 118, 237);
+        }
+
+        .footer_hr {
+            border: 1px solid var(--theme-bold);
+            width: 97%;
+            margin: 3px 0 3px 0;
+        }
+
+        .email {
+            text-align: end;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 16px;
+            margin-bottom: 3px;
+            color: var(--theme-bold);
+        }
+
+        .email i {
+            font-style: normal;
+            user-select: none;
+        }
+        @media only screen and (max-width: 600px) {
+            .nav_links {
+                width: 0;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                right: 0;
+                z-index: 3;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                background-color: var(--theme-child);
+                box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.5);
+                flex-direction: column;
+            }
+        }
+
+        @media only screen and (min-width: 601px){
+            .nav_links {
+                flex-direction: row;
+                justify-content: flex-end;
+                width: auto;
+                background-color: var(--theme-child);
+            }
+
+            .nav_links > a, .nav_links > div:not(:last-child) {
+                margin-right: 15px;
+            }
+
+            .nav_links > a, .nav_links > div {
+                border-bottom: 1px solid var(--theme-bold);
+            }
+
+            .about_me, .contact_me {
+                white-space: nowrap;
+            }
+
+            .open_nav, .close_nav {
+                display: none;
+            }
+        }
+    </style>
+    <link rel="preload" href="./assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./assets/css/bootstrap-icons.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="./assets/css/style.css">
+        <link rel="stylesheet" href="./assets/css/bootstrap-icons.css">
+    </noscript>
+    <title>Front-End Web Development</title>
+</head>
+<body id="body">
+    <header id="myHeader" class="header">
+        <div id="myLogo">
+            <i class="logo">Fnd</i>            
+        </div>
+        <div id="myNavOverlay" class="hidden"></div>
+        <div id="myNav" class="nav_links">
+            <i class="close_nav bi bi-x-circle"></i>        
+            <a href="./">Home</a>
+            <a href="./pricing/">Pricing</a>
+            <div id="open_about" class="about_me">About Me</div>
+            <div id="open_contact" class="contact_me">Contact Me</div>
+            <div id="open_faqs" class="faqs_page">FAQS</div>
+        </div>
+        <i class="open_nav bi bi-list"></i>
+    </header>
+    <main id="myContent" class="main">
+        <div id="myPoster" class="poster">
+            <img class="poster_image" src="./assets/images/poster.svg" alt="front-end web developer poster">
+        </div>
+        <div class="quote">
+            <p class="quote_text">"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." <b>- unknown</b></p>
+        </div>
+        <div id="myMotor" class="motor">
+            <div class="motor_type">
+                <div class="motor_content">
+                    <div class="motor_img_header">
+                        <i class="motor_image bi bi-stopwatch"></i>
+                        <div class="motor_header">Time Management</div>
+                    </div>
+                    <div class="motor_text">How fast the project goes will not only depend on how skilled i am, but also on how much data you provide and communication.</div>
+                </div>
+            </div>
+            <div class="motor_type">
+                <div class="motor_content">
+                    <div class="motor_img_header">
+                        <i class="motor_image bi bi-code-slash"></i>                
+                        <div class="motor_header">Clean Code</div>
+                    </div>
+                    <div class="motor_text">Code will be well formated. Comments can also be added if requested at the <b>start</b> of the project.</div>
+                </div>
+            </div>
+            <div class="motor_type">
+                <div class="motor_content">
+                    <div class="motor_img_header">
+                        <i class="motor_image bi bi-book"></i>        
+                        <div class="motor_header">Guide</div>
+                    </div>
+                    <div class="motor_text">
+                        <p>New to all this? want to manage your own website? some developer gave you <b>code</b> you do not understand? I can serve as a code interpreter.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mySkills" class="skills">
+            <div class="skill_content">
+                <div class="skill_text">
+                    <p class="skill_header">What can i do for you?</p>
+                    <p class="skill_body">It is well known that a memorable and stylish website can be of great help to any brand or business. Taking this into account, i make sure your website is user friendly and functions just how you want by using all the latest and greatest techniques available out there. I plan the project with you from start to finish (there will be lots of room for changes and improvements) to make sure that when finished it is better than you expected.
+                    </p>
+                </div>
+                <div class="skill_images">
+                    <img class="skill_image" src="./assets/images/responsive.svg" alt="responsive web design">
+                </div>
+            </div>
+        </div>
+        <div id="myProjects" class="latest_projects">
+            <div class="projects_tittle">Latest Projects</div>
+            <div class="project_notice">
+                <p class="project_note"><b>Note:</b> There is no back-end code, all your info is stored on your browser.</p>
+                <p class="project_click">The <i>3</i> items below are projects, <b>click to open.</b></p>
+            </div>
+            
+            <div id="projectLaunchers" class="projects">
+                <div id="tab_project" class="project" title="click to open">
+                    <img class="project_image" src="./assets/images/tabs.webp" alt="user authentication ui design">
+                    <hr class="project_line">
+                    <div class="project_body">
+                        <div class="project_label">Authentication</div>
+                        <div class="project_description">A tab view user authentication form for a website</div>
+                    </div>
+                </div>
+                <div id="payment_project" class="project" title="click to open">
+                    <img class="project_image" src="./assets/images/payment.webp" alt="credit card authentication ui">
+                    <hr class="project_line">
+                    <div class="project_body">
+                        <div class="project_label">Item Purchase</div>
+                        <div class="project_description">Purchase mechanism of an item on a website</div>
+                    </div>
+                </div>
+                <div id="artist_project" class="project" title="click to open">
+                    <img class="project_image" src="./assets/images/fashionx190.webp" alt="fashion ui design">
+                    <hr class="project_line">
+                    <div class="project_body">
+                        <div class="project_label">
+                            Fashion Designer
+                        </div>
+                        <div class="project_description">A simple one page website for a fashion designer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="myModal" class="hidden">
+            <i class="close_modal bi bi-x-circle"></i>
+            <div id="myFaqs" class="hidden">
+                <div class="modal_view_header">
+                    <div class="modal_view_bg_header">FAQS Page</div>
+                    <div class="modal_view_sm_header">This page answers a few questions about <b>what i do</b> and the <b>services</b> i offer.</div>
+                </div>
+                <div class="faqs_contents">
+                    <div class="faq_content">
+                        <div id="open_faqbd" class="faq_head active">
+                            <span class="faq_title">programming languages</span>
+                            <span class="faq_btn bi bi-chevron-up"></span>
+                        </div>
+                        <div id="faqBd" class="faq_body">HTML, CSS & JAVASCRIPT.</div>
+                    </div>
+                    <div class="faq_content">
+                        <div id="open_faqbd" class="faq_head">
+                            <span class="faq_title">Web builder</span>
+                            <span class="faq_btn bi bi-chevron-down"></span>
+                        </div>
+                        <div id="faqBd" class="hidden">Wordpress.</div>
+                    </div>
+                    <div class="faq_content">
+                        <div id="open_faqbd" class="faq_head">
+                            <span class="faq_title">CSS Preprocessor</span>
+                            <span class="faq_btn bi bi-chevron-down"></span>
+                        </div>
+                        <div id="faqBd" class="hidden">SASS</div>
+                    </div>
+                    <div class="faq_content">
+                        <div id="open_faqbd" class="faq_head">
+                            <span class="faq_title">CSS Frameworks</span>
+                            <span class="faq_btn bi bi-chevron-down"></span>
+                        </div>
+                        <div id="faqBd" class="hidden">Tailwind Css & Bootstrap</div>
+                    </div>
+                    <div class="faq_content">
+                        <div id="open_faqbd" class="faq_head">
+                            <span class="faq_title">Do i add comments to my code</span>
+                            <span class="faq_btn bi bi-chevron-down"></span>
+                        </div>
+                        <div id="faqBd" class="hidden">Yes. Not by default, you will have to ask for it at the <b>start of the project</b>. I do not charge extra for this service.</div>
+                    </div>
+                    <div class="faq_content">
+                        <div id="open_faqbd" class="faq_head">
+                            <span class="faq_title">more</span>
+                            <span class="faq_btn bi bi-chevron-down"></span>
+                        </div>
+                        <div id="faqBd"  class="hidden">more faqs coming soon</div>
+                    </div>
+                </div>
+            </div>
+            <div id="myTab" class="hidden">
+                <div class="modal_view_header">
+                    <div class="modal_view_bg_header">Login | Signup Page</div>
+                    <div class="modal_view_sm_header">This page demontrates a <b>Pop Up Tab View</b> design for a user authentication page.</div>
+                </div>
+                <div class="tabs_con">
+                    <div class="tabs_btns">
+                        <div id="open_signup" class="auth_btn signup_active">Sign up</div>
+                        <div id="open_login" class="auth_btn login_inactive">Log in</div>
+                    </div>
+                    <div id="sign_up" class="auth_con">
+                        <form class="auth" action="">
+                            <div class="inp_con">
+                                <label class="inp_label" for="name">Name:</label>
+                                <input type="text" id="name" placeholder="example: John Smith" class="sig_inp" autocomplete="name">
+                            </div>
+                            <div class="inp_con">
+                                <label class="inp_label" for="user-name">Username:</label>
+                                <input type="text" id="user-name" placeholder="example: johnsmith" class="sig_inp">
+                            </div>
+                            <div class="inp_con">
+                                <label class="inp_label" for="user-email">Email:</label>
+                                <input type="email" id="user-email" placeholder="example: johnsmith@gmail.com" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$" title="email should be in the format 'johnsmith@gmail.com'" class="sig_inp"> 
+                                <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" -->
+                            </div>
+                            <div class="inp_con">
+                                <label class="inp_label" for="sig_pass">Password:</label>
+                                <div class="pas_con">
+                                    <input id="sig_pass" type="password" placeholder="password" minlength="8" maxlength="12" autocomplete="new-password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}" title="must contain an uppercase, a lowercase, a number and be at least 8 characters long" class="sig_inp">
+                                    <i id="sig_paswt" class="pas_swt bi bi-eye"></i>
+                                </div>
+                                <div class="pas_format">
+                                    <p><i id="sm_le" class="bi bi-x-circle pas_mt0"></i>must contain a lower case</p>
+                                    <p><i id="cp_le" class="bi bi-x-circle pas_mt0"></i>must contain an upper case</p>
+                                    <p><i id="pas_num" class="bi bi-x-circle pas_mt0"></i>must contain a number</p>
+                                    <p><i id="pas_len" class="bi bi-x-circle pas_mt0"></i>must have a minimum length of 8</p>
+                                </div>
+                            </div>
+                            <div class="inp_con">
+                                <label class="inp_label" for="repeat_sigpass">Repeat Password:</label>
+                                <div class="pas_con">
+                                    <input id="repeat_sigpass" type="password" placeholder="repeat password" class="sig_inp">
+                                    <i id="pasmt" class="pas_swt pas_mt1 bi bi-check2-circle"></i>
+                                </div>
+                            </div>
+                            <input type="submit" name="submit_sig" value="submit" class="sig_inp">
+                            <div class="tab_swt">
+                                already registered?... <i id="tab_swts">log in</i>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="log_in" class="hidden">
+                        <form class="auth" action="">
+                            <div class="inp_con">
+                                <input id="log_name" type="text" placeholder="uername or email" class="log_inp">
+                            </div>
+                            <div class="inp_con">
+                                <div class="pas_con">
+                                    <input id="log_pass" type="password" placeholder="password" autocomplete="current-password" class="log_inp">
+                                    <i id="log_paswt" class="pas_swt bi bi-eye"></i>
+                                </div>
+                            </div>
+                            <input type="submit" name="submit_log" value="submit" class="log_inp">
+                            <div class="tab_swt">
+                                not yet registered?... <i id="tab_swtl">sign up</i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="myPayment" class="hidden">
+                <div class="modal_view_header">
+                    <div class="modal_view_bg_header">Payment Type Page</div>
+                    <div class="modal_view_sm_header">This page demontrates the free flowing <b>item purchase mechanism</b> of an e-commence website</div>
+                </div>
+                <div class="payment_con">
+                    <div class="paytion_con">
+                        <div class="paytion">
+                            <div id="open_order" class="ellipse ellipse_bg">
+                                <div class="sm_ellipse"></div>
+                            </div>
+                            <hr class="paytion_li">
+                            <div id="open_ship" class="ellipse">
+                                <div class="sm_ellipse"></div>
+                            </div>
+                            <hr class="paytion_li">
+                            <div id="open_checkout" class="ellipse">
+                                <div class="sm_ellipse"></div>
+                            </div>
+                        </div>
+                        <div class="paytion_labcon">
+                            <div class="paytion_lab">ORDER</div>
+                            <div class="paytion_lab">SHIPPING</div>
+                            <div class="paytion_lab">PAYMENT</div>
+                        </div>
+                    </div>
+                    <div id="order" class="card_con">
+                        <div class="order_card">
+                            <div>
+                                <div class="card-header">
+                                    <p>Basic</p>
+                                    <p>create responsive website</p>
+                                    <p><small>$</small> <b>150</b></p>
+                                </div>
+                                <div class="crl">
+                                    <i class="bi bi-arrow-down-circle"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <p class="bi bi-check2-square">Single theme</p>
+                                    <p class="bi bi-check2-square">5 corrections</p>
+                                    <p class="bi bi-check2-square">Delivery in 72 hours</p>
+                                </div>
+                                <button type="button" class="card-button">ORDER NOW</button>
+                            </div>
+                        </div>
+                        <div class="order_card">
+                            <div>
+                                <div class="card-header">
+                                    <p>Advanced</p>
+                                    <p>create responsive website</p>
+                                    <p><small>$</small> <b>250</b></p>
+                                </div>
+                                <div class="crl">
+                                    <i class="bi bi-arrow-down-circle"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <p class="bi bi-check2-square">Single theme</p>
+                                    <p class="bi bi-check2-square">10 corrections</p>
+                                    <p class="bi bi-check2-square">Delivery in 48 hours</p>
+                                    <p class="bi bi-check2-square">Website upload</p>
+                                </div>
+                                <button type="button" class="card-button">ORDER NOW</button>
+                            </div>
+                        </div>
+                        <div class="order_card">
+                            <div>
+                                <div class="card-header">
+                                    <p>Premium</p>
+                                    <p>create responsive website</p>
+                                    <p><small>$</small> <b>350</b></p>
+                                </div>
+                                <div class="crl">
+                                    <i class="bi bi-arrow-down-circle"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="card-body">
+                                    <p class="bi bi-check2-square">Dual theme</p>
+                                    <p class="bi bi-check2-square">15 corrections</p>
+                                    <p class="bi bi-check2-square">Delivery in 24 hours</p>
+                                    <p class="bi bi-check2-square">Website upload</p>
+                                </div>
+                                <button type="button" class="card-button">ORDER NOW</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="shipping" class="hidden">
+                        <h2>User Info</h2>
+                        <form action="#" class="ship_form">
+                            <div>
+                                <label for="fullname">Fullname</label>
+                                <input type="text" minlength="4" name="fullname" id="fullname" required>
+                            </div>
+                            <div>
+                                <label for="package">Package</label>
+                                <input type="text" name="package" id="package" readonly required>
+                            </div>
+                            <div>
+                                <label for="delivery">Delivery</label>
+                                <input type="text" name="delivery" id="delivery" readonly required>
+                            </div>
+                            <div>
+                                <label for="platform">Platform</label>
+                                <input type="text" value="Whatsapp" name="platform" id="platform" readonly>
+                                <i id="customSelect" class="bi bi-chevron-down custom-select"></i>
+                                <div id="platforms" class="hidden">
+                                    <i class="bi bi-whatsapp active">Whatsapp</i>
+                                    <i class="bi bi-telegram">Telegram</i>
+                                    <i class="bi bi-messenger">Messanger</i>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="username">Username</label>
+                                <input type="text" minlength="3" name="username" id="username" required>
+                            </div>
+                        </form>
+                        <div class="change_page">
+                            <button type="button" class="back">back</button>
+                            <button type="button" class="next">continue</button>
+                        </div>
+                    </div>
+                    <div id="checkout" class="hidden">
+                        <h2>Billing Info</h2>
+                        <form action="#" class="checkout_form">
+                            <div>
+                                <input type="text" name="package_price" id="package_price" readonly>
+                            </div>
+                            <div>
+                                <div>
+                                    <label for="card_number">Card Number</label>
+                                    <input type="text" inputmode="numeric" name="card_number" id="card_number" minlength="10" maxlength="24" placeholder="1234 5678 3456 2456" required>
+                                </div>
+                                <div>
+                                    <label for="card_type">Card Type</label>
+                                    <input type="image" src="./assets/images/search.gif" alt="card_type" name="card_type" id="card_type">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="card_name">Card Holder Name</label>
+                                <input type="text" name="card_name" id="card_name" required>
+                            </div>
+                            <div>
+                                <label for="card_exp_date">Expiry Date</label>
+                                <input type="text" name="card_exp_date" id="card_exp_date" readonly required>
+                                <i id="customSelect" class="bi bi-chevron-down custom-select"></i>
+                                <div id="expiryDates" class="hidden">
+                                    <span class="expiry_months"></span>
+                                    <span class="expiry_years"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="card_cvv">CVV</label>
+                                <input type="text" inputmode="numeric" minlength="3" maxlength="3" pattern="[0-9]{3}" title="minimum and maximum of three numbers" name="card_cvv" id="card_cvv" required>
+                            </div>
+                            <div>
+                                <input type="submit" value="checkout">
+                            </div>
+                        </form>
+                        <div class="change_page">
+                            <button type="button" class="back">back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="myArtist" class="hidden">
+                <div class="art_con">
+                    <div class="modal_view_header">
+                        <div class="modal_view_bg_header">Fashion Designer Page</div>
+                        <div class="modal_view_sm_header">This page demontrates a <b>fixed width/height</b> design for a website. One of the two designs below is an image and the other code, try to spot the difference.</div>
+                    </div>
+
+                    <div id="myResolution" class="current_res">
+                        <div class="res_lable">Current screen resolution</div>
+                        <div class="res_con">
+                           <div class="res">
+                                <label for="screen_width">width = </label>
+                                <input type="text" name="screen_width" id="screen_width" class="res_value" readonly>
+                            </div>
+                            <p>x</p>
+                            <div class="res">
+                                <label for="screen_height">height = </label>
+                                <input type="text" name="screen_height" id="screen_height" class="res_value" readonly>
+                            </div> 
+                        </div>
+                    </div>
+    
+                    <div class="fashion_design">
+                        <img src="assets/images/fashion.webp" alt="fashion ui design" title="design">
+                    </div>
+
+                    <div class="art_root">
+                        <div class="artist_content" title="code">
+                            <div class="art_header">
+                                <div class="art_head_con">
+                                    <div class="art_logo">
+                                        <img class="art_logo_img" src="./assets/images/logo.webp" alt="logo">
+                                    </div>
+                                    <div class="art_menu">
+                                        <i class="open_artnav bi bi-list"></i>
+                                        <div id="art_nav" class="hidden">
+                                            <div class="close_artnav" onclick="this.parentNode.classList.remove('artnav_links');this.parentNode.classList.add('hidden');">x</div>
+                                            <a href="#">link 1</a>
+                                            <a href="#">link 2</a>
+                                            <a href="#">link 3</a>
+                                        </div>
+                                    <!-- &#x1F354;  &#127828; &#9776; -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="art_head_bspace"></div>
+                            <div class="art_main">
+                                <div class="art_main_lspace"></div>
+                                <div class="art_main_con">
+                                    <div class="am_header">
+                                        Fashion is something we deal with everyday.
+                                    </div>
+                                    <div class="amh_bspace"></div>
+                                    <div class="am_content">
+                                        <div class="am_sm_text">
+                                            <p>Fashion is a language which tells a story about the person who wears it. "Clothes create a <i class="am_3dots">...</i><span class="am_h0tx">wordless means of communication that we all understand."</span>
+                                            </p>
+                                        </div>
+                                        <div class="amsm_bspace"></div>
+                                        <div class="am_read_con">
+                                            <div id="am_rm" class="am_read">Read more</div>
+                                            <div id="am_ls" class="hidden">Read less</div>
+                                        </div>
+                                        <div class="amrm_bspace"></div>
+                                        <div class="am_socials">
+                                            <a href="https://www.twitter.com/fndweb_official" target="_blank">
+                                                <i class="twitter bi bi-twitter"></i>
+                                            </a>
+                                            <a href="https://www.facebook.com/fndweb.official" target="_blank">
+                                                <i class="facebook bi bi-facebook"></i>
+                                            </a>
+                                            <a href="https://www.instagram.com/fndweb.official" target="_blank">
+                                                <!-- <img class="instagram" src="assets/images/instagram.webp" alt="instagram"> -->
+                                                <i class="instagram bi bi-instagram"></i>
+                                            </a>
+                                            <a href="https://www.youtube.com" target="_blank">
+                                                <i class="youtube bi bi-youtube"></i>
+                                            </a>
+                                        </div>
+                                        <div class="am_socials_bspace"></div>
+                                    </div>
+                                </div>
+                                <div class="art_main_rspace"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="extra_content">
+                        <div class="screen_resolution">
+                            <div class="recommend_res">Recommended resolution: <b>(1200 x 768) px</b></div>
+                        </div>
+                        <div class="disclaimer">my code | not my design</div>
+                    </div>  
+                </div>
+            </div>
+            <div id="myAbout" class="hidden">
+                <div class="modal_view_header">
+                    <div class="modal_view_bg_header">About Me</div>
+                </div>
+                <div class="about_con">
+                    <img class="about_image" src="./assets/images/profile-removebg.webp" alt="an image of me">
+                    <div class="about_text">
+                        <div class="abt_main">
+                            <p class="abt_1">First of all, Greetings to everyone currently viewing this page/website.</p>
+                            <p class="abt_2">My name is <i>M. Ndum</i>, I am a front-End Web Developer with slightly over <i>1.3 years</i> of work experience (mostly offline/locally) in building websites with <i>HTML</i>, <i>CSS</i> and <i>JavaScript</i>.</p>
+                        </div>
+                        <p class="abt_3">I am quite sure this is probably the shortest, worst "about page" you have come across, I am not very good at literature/story-telling. I can only hope you get to grade me based on the "home page" and the other pages you just viewed. I just noticed this text i wrote looks slightly longer than the one above so i decided to shrink it a little.</p>
+                    </div>
+                </div>
+            </div>
+            <div id="myContact" class="hidden">
+                <div class="modal_view_header">
+                    <div class="modal_view_bg_header">Get In Touch</div>
+                    <div class="modal_view_sm_header">Tou can contact me through any of these platforms listed below. click on any platform listed below to access my profile</div>
+                </div>
+                <div id="my_contact_links" class="contact_links">
+                    <a href="https://twitter.com/messages/compose?recipient_id=1643005645879230465" class="contact_link" target="_blank">
+                        <img class="contact_image" src="./assets/images/twitter.webp" alt="twitter icon">
+                        <p class="contact_text">Twitter</p>
+                    </a>
+                    <a href="https://www.facebook.com/fndweb.official" class="contact_link" target="_blank">
+                        <img class="contact_image" src="./assets/images/facebook.webp" alt="facebook icon">
+                        <p class="contact_text">Facebook</p>
+                    </a>
+                    <a href="https://t.me/fndweb_official" class="contact_link" target="_blank">
+                        <img class="contact_image" src="./assets/images/telegram.webp" alt="telegram icon">
+                        <p class="contact_text">Telegram</p>
+                    </a>
+                    <a href="https://wa.me/+237655747790" class="contact_link" target="_blank">
+                        <img class="contact_image" src="./assets/images/whatsapp.webp" alt="whatsapp icon">
+                        <p class="contact_text">WhatsApp</p>
+                    </a>
+                    <a href="#" class="contact_link" target="_blank">
+                        <img class="contact_image" src="./assets/images/discord.webp" alt="discord icon">
+                        <p class="contact_text">Discord</p>
+                    </a>
+                    <a href="https://m.me/fndweb.official" class="contact_link" target="_blank">
+                        <img class="contact_image" src="./assets/images/messenger.webp" alt="messanger icon">
+                        <p class="contact_text">Messanger</p>
+                    </a>
+                    <a href="https://ig.me/m/fndweb.official" class="contact_link" target="_blank">
+                        <img class="contact_image" src="./assets/images/instagram_colored.webp" alt="instagram icon">
+                        <p class="contact_text">Instagram</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="myFooter" class="footer">
+        <div class="footer_sub">
+            <div id="myThemes" class="themes">
+                <div id="my_theme" class="theme bi bi-moon"></div>
+            </div>
+            <div class="social_links">
+                <a class="scl-foot" href="https://www.twitter.com/fndweb_official" target="_blank">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a class="scl-foot" href="https://www.facebook.com/fndweb.official" target="_blank">
+                    <i class="bi bi-facebook"></i>
+                </a>
+            </div>
+        </div>
+        <hr class="footer_hr">
+        <div class="email"><i>Email: </i>fndweb.official@gmail.com</div>
+    </footer>
+    <div id="to_top" class="to_top bi bi-arrow-bar-up">
+    </div>
+    <div id="myOverlay" class="hidden"></div>
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+</body>
+</html>
