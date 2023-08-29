@@ -858,6 +858,7 @@ platOpt.forEach(opt => {
 const creditCardInp = document.querySelector("#card_number");
 const creditCardType = document.querySelector("#card_type");
 const creditCardCvv = document.querySelector("#card_cvv");
+const cardVid = document.querySelector("#card_vid");
 
 const visaPattern = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
 const mastPattern = /^(?:5[1-5][0-9]{14})$/;
@@ -867,6 +868,8 @@ const discPattern = /^(?:6(?:011|5[0-9][0-9])[0-9]{12})$/;
 const cvvPattern = /^([0-9]{3})$/;
 
 function setCardType (type) {
+    cardVid.classList.add(h1);
+    creditCardType.classList.remove(h1);
     creditCardType.setAttribute("src", type);
 }
 
@@ -896,8 +899,10 @@ creditCardInp.addEventListener("input", function () {
             setCardType(card_type)
         }
     } else {
-        card_type = "./assets/images/search.webm";
-        setCardType(card_type)
+        if (!creditCardInp.classList.contains(h1)) {
+            creditCardType.classList.add(h1);
+            cardVid.classList.remove(h1);
+        }
     }
 });
 
