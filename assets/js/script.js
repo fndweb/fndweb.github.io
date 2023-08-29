@@ -896,7 +896,7 @@ creditCardInp.addEventListener("input", function () {
             setCardType(card_type)
         }
     } else {
-        card_type = "./assets/images/search.gif";
+        card_type = "./assets/images/search.webm";
         setCardType(card_type)
     }
 });
